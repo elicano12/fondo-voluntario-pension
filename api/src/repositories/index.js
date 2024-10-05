@@ -1,5 +1,5 @@
 const fondosRepository = require('./fondos.resopitory');
-const userRepository = require('./user.repository');
+const userRepository = require('./usuarios.repository');
 
 module.exports = {
     fondosRepository,

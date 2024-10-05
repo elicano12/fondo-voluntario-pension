@@ -1,8 +1,9 @@
 const express = require("express");
-const fondosController = require("../controllers/fondos.controller");
+const {fondoController} = require("../controllers");
 
 const fondosRouter = express.Router();
 
-fondosRouter.get("/", fondosController.getFondosPensiones);
+fondosRouter.get("/", fondoController.getFondosPensiones);
+fondosRouter.post("/crear-tipo-fondos", fondoController.postFondosPensiones);
 
 module.exports = fondosRouter;

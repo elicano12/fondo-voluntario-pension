@@ -1,7 +1,7 @@
-const { fondoController } = require("./fondos.controller");
-const { aperturaFondoController } = require("./aperturaFondos.controller");
+const fondoController  = require("./fondos.controller");
+const usuariosController = require("./usuarios.controller");
 
 module.exports = {
   fondoController,
-  aperturaFondoController
+  usuariosController
 };
