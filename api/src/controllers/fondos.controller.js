@@ -20,8 +20,9 @@ const getFondosPensionesById = async (req, res, next) => {
 
 const postFondosPensiones = async (req, res, next) => {
   try {
-    await fondosServices.postFondosPensiones(req, res);
-    res.status(201);
+    const { nombre, montoMinimo, categoria } = req.body
+    const fondoSave = await fondosServices.postFondosPensiones(nombre, montoMinimo, categoria);
+    res.status(201).json(fondoSave);
   } catch (err) {
     next(err);
   }

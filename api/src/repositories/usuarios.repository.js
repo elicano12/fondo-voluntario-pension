@@ -14,16 +14,16 @@ const saveUsuario = async (usuario) => {
   return await usuario.save();
 };
 
-const postUsuario = async (req, res) => {
+const postUsuario = async (nombre, email, telefono, saldo, notificaciones) => {
   const usuario = new UsuariosModel({
-    nombre: req.body.nombre,
-    email: req.body.email,
-    telefono: req.body.telefono,
-    saldo: req.body.saldo,
-    notificaciones: req.body.notificaciones,
+    nombre: nombre,
+    email: email,
+    telefono: telefono,
+    saldo: saldo,
+    notificaciones: notificaciones,
   });
   await usuario.save();
-  return res.status(201).json(usuario);
+  return usuario;
 };
 
 module.exports = {

@@ -11,7 +11,8 @@ const getUsuarios = async (req, res, next) => {
 
 const getUsuarioById = async (req, res, next) => {
   try {
-    const usuario = await usuariosServices.getUsuarioById(req.query.id);
+    const id = req.query.id;
+    const usuario = await usuariosServices.getUsuarioById(id);
     return res.json(usuario);
   } catch (err) {
     next(err);
@@ -20,8 +21,16 @@ const getUsuarioById = async (req, res, next) => {
 
 const postUsuarios = async (req, res, next) => {
   try {
-    await usuariosServices.postUsuarios(req, res);
-    res.status(201);
+    const { nombre, email, telefono, saldo, notificaciones } = req.body;
+
+    const usuarioSave = await usuariosServices.postUsuarios(
+      nombre,
+      email,
+      telefono,
+      saldo,
+      notificaciones
+    );
+    res.status(201).json(usuarioSave);
   } catch (err) {
     next(err);
   }

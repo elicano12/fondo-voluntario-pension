@@ -20,12 +20,13 @@ const getFondosPensionesById = async (id) => {
   return fondo;
 };
 
-const postFondosPensiones = async (req, res) => {
-  if (!req.body.nombre || !req.body.montoMinimo || !req.body.categoria) {
+const postFondosPensiones = async (nombre, montoMinimo, categoria) => {
+  if (!nombre || !montoMinimo || !categoria) {
     throw new Error("Missing required fields: nombre, montoMinimo, categoria");
   }
 
-  await fondosRepository.postFondoPensiones(req, res);
+  const fondoPensiones = await fondosRepository.postFondoPensiones(nombre, montoMinimo, categoria);
+  return fondoPensiones;
 };
 
 module.exports = {

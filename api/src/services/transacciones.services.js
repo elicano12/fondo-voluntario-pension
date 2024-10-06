@@ -16,18 +16,16 @@ const getTransacciones = async () => {
   return transacciones;
 };
 
-const postTransacciones = async (req, res) => {
-  const { tipo, monto } = req.body;
-  if (!tipo || !monto) {
+const postTransacciones = async (usuarioId, fondoId, tipo, monto) => {
+  if ( !usuarioId || !fondoId || !tipo || !monto) {
     throw new BadRequestError("Missing required fields: tipo and monto");
   }
 
-  await transaccionesRepository.postTransacciones(req, res);
+  await transaccionesRepository.postTransacciones(suarioId, fondoId, tipo, monto);
 };
 
-const postAperturaFondo = async (req, res) => {
+const postAperturaFondo = async (usuarioId, fondoId, monto, tipo) => {
   try {
-    const { usuarioId, fondoId, monto, tipo } = req.body;
 
     if (!usuarioId || !fondoId || !monto) {
       return res.status(400).json({
@@ -67,24 +65,22 @@ const postAperturaFondo = async (req, res) => {
 
     await transaccionesRepository.saveTransacciones(transaccion);
 
-    if (usuario.notificaciones === "email") {
-      enviarEmails(
-        usuario.email,
-        `Suscripción exitosa al fondo ${fondo.nombre}`
-      );
-    } else {
-      enviarSMS(
-        usuario.telefono,
-        `Suscripción exitosa al fondo ${fondo.nombre}`
-      );
-    }
+    // if (usuario.notificaciones === "email") {
+    //   enviarEmails(
+    //     usuario.email,
+    //     `Suscripción exitosa al fondo ${fondo.nombre}`
+    //   );
+    // } else {
+    //   enviarSMS(
+    //     usuario.telefono,
+    //     `Suscripción exitosa al fondo ${fondo.nombre}`
+    //   );
+    // }
 
-    return res
-      .status(200)
-      .json({ fondo, message: "Suscripción realizada con éxito." });
+    return { fondo, message: "Suscripción realizada con éxito." };
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Error interno del servidor." });
+    return  {message: error.message };
   }
 };
 
@@ -140,12 +136,10 @@ const postCancelacionFondo = async (usuarioId, fondoId) => {
     //   );
     // }
 
-    return res
-      .status(200)
-      .json({ fondo, message: "Cancelación realizada con éxito." });
+    return { fondo, message: "Cancelación realizada con éxito." };
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: error.message });
+    return { message: error.message };
   }
 };
 

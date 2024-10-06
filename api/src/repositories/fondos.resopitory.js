@@ -10,14 +10,14 @@ const getFondoPensionesById = (id) => {
   return fondoPensiones;
 };
 
-const postFondoPensiones = async (req, res) => {
+const postFondoPensiones = async ( nombre, montoMinimo, categoria ) => {
   const fondoPensiones = new FondoModel({
-    nombre: req.body.nombre,
-    montoMinimo: req.body.montoMinimo,
-    categoria: req.body.categoria,
+    nombre: nombre,
+    montoMinimo: montoMinimo,
+    categoria: categoria,
   });
-  await fondoPensiones.save();
-  res.status(201).json(fondoPensiones);
+  await fondoPensiones.save()
+  return fondoPensiones;
 };
 
 module.exports = {

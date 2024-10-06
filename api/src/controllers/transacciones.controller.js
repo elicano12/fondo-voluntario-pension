@@ -11,30 +11,37 @@ const getTransacciones = async (req, res, next) => {
 
 const postTransacciones = async (req, res, next) => {
   try {
-    await transaccionesServices.postTransacciones(req, res);
-    res.status(201);
+    const { suarioId, fondoId, tipo, monto } = req.body;
+    const transaccionSave = await transaccionesServices.postTransacciones(
+      suarioId,
+      fondoId,
+      tipo,
+      monto
+    );
+    res.status(201).json(transaccionSave);
   } catch (err) {
     next(err);
   }
 };
 
 const postAperturaFondo = async (req, res, next) => {
-    try {
-        await transaccionesServices.postAperturaFondo(req, res);
-        res.status(201);
-      } catch (err) {
-        next(err);
-      }
+  try {
+    const { usuarioId, fondoId, monto, tipo } = req.body;
+    const { fondo, message } = await transaccionesServices.postAperturaFondo(usuarioId, fondoId, monto, tipo);
+    res.status(201).json({ fondo, message });
+  } catch (err) {
+    next(err);
+  }
 };
 
 const postCancelacionFondo = async (req, res, next) => {
-    try {
-        const { usuarioId, fondoId } = req.body;
-        await transaccionesServices.postCancelacionFondo(usuarioId, fondoId);
-        res.status(201);
-      } catch (err) {
-        next(err);
-      }
+  try {
+    const { usuarioId, fondoId } = req.body;
+    const { fondo, message } = await transaccionesServices.postCancelacionFondo(usuarioId, fondoId);
+    res.status(201).json({ fondo, message });
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = {

@@ -20,12 +20,19 @@ const getUsuarioById = async (id) => {
   return usuario;
 };
 
-const postUsuarios = async (req, res) => {
-  if (!req.body.nombre || !req.body.email || !req.body.telefono) {
+const postUsuarios = async (nombre, email, telefono, saldo, notificaciones) => {
+  if (!nombre || !email || !telefono) {
     throw new Error("Missing required fields: nombre, email, telefono");
   }
 
-  await usuariosRepository.postUsuario(req, res);
+  const usuarioSave = await usuariosRepository.postUsuario(
+    nombre,
+    email,
+    telefono,
+    saldo,
+    notificaciones
+  );
+  return usuarioSave;
 };
 
 module.exports = {

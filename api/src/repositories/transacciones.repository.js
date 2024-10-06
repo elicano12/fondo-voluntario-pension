@@ -6,17 +6,17 @@ const getTransacciones = () => {
   return transacciones;
 };
 
-const postTransacciones = async (req, res) => {
+const postTransacciones = async (usuarioId, fondoId, tipo, monto) => {
   const transacciones = new TransaccionModel({
-    usuarioId: req.body.usuarioId,
-    fondoId: req.body.fondoId,
-    tipo: req.body.tipo,
-    monto: req.body.monto,
+    usuarioId: usuarioId,
+    fondoId: fondoId,
+    tipo: tipo,
+    monto: monto,
     idUnico: new Types.ObjectId().toString(),
   });
 
   await transacciones.save();
-  return res.status(201).json(transacciones);
+  return transacciones;
 };
 
 const saveTransacciones = async (transacciones) => {
