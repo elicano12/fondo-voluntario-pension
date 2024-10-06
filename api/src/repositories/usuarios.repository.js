@@ -1,12 +1,21 @@
-const { UsariosModel } = require("../models/usuarios.model");
+const { UsuariosModel } = require("../models/usuarios.model");
 
 const getUsuarios = () => {
-  const usuarios = UsariosModel.find();
+  const usuarios = UsuariosModel.find();
   return usuarios;
 };
 
+const getUsuarioById = (id) => {
+  const usuario = UsuariosModel.findById(id);
+  return usuario;
+};
+
+const saveUsuario = async (usuario) => {
+  return await usuario.save();
+};
+
 const postUsuario = async (req, res) => {
-  const usuario = new UsariosModel({
+  const usuario = new UsuariosModel({
     nombre: req.body.nombre,
     email: req.body.email,
     telefono: req.body.telefono,
@@ -19,5 +28,7 @@ const postUsuario = async (req, res) => {
 
 module.exports = {
   getUsuarios,
+  getUsuarioById,
+  saveUsuario,
   postUsuario,
 };

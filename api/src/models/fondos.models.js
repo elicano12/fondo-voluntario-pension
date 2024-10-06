@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const fondoSchema = new Schema(
   {
     nombre: { type: String, required: true },
-    montoMinimo: { type: String, required: true },
+    montoMinimo: { type: Number, required: true },
     categoria: { type: String, enum: ['FPV', 'FIC'] },
   },
   { timestamps: true }

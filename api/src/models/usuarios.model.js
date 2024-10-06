@@ -13,6 +13,6 @@ const UsuariosSchema = new Schema(
   { timestamps: true }
 );
 
-const UsariosModel = mongoose.model(config.collectionUsuarios, UsuariosSchema);
+const UsuariosModel = mongoose.model(config.collectionUsuarios, UsuariosSchema);
 
-module.exports = { UsariosModel };
+module.exports = { UsuariosModel };

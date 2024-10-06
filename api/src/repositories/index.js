@@ -1,7 +1,9 @@
 const fondosRepository = require('./fondos.resopitory');
-const userRepository = require('./usuarios.repository');
+const usuariosRepository = require('./usuarios.repository');
+const transaccionesRepository = require('./transacciones.repository'); 
 
 module.exports = {
     fondosRepository,
-    userRepository
+    usuariosRepository,
+    transaccionesRepository,
   };
