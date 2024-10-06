@@ -2,6 +2,8 @@ const express = require('express');
 const pino = require('pino');
 const pinoHttp = require('pino-http');
 const routes = require('./routes');
+const cors = require('cors');
+
 // const errorHandlerMiddleware = require('./middlewares/errorHandler');
 require('./config/databases/mongoDB');
 
@@ -9,6 +11,9 @@ const app = express();
 
 // Middleware to parse JSON
 app.use(express.json());
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 
 app.use(
   pinoHttp({

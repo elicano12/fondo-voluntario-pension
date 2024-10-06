@@ -11,6 +11,15 @@ const getUsuarios = async () => {
   return usuarios;
 };
 
+const getUsuarioById = async (id) => {
+  const usuario = await usuariosRepository.getUsuarioById(id);
+  if (usuario == null) {
+    throw new NotFoundError("Usuario no encontrado");
+  }
+
+  return usuario;
+};
+
 const postUsuarios = async (req, res) => {
   if (!req.body.nombre || !req.body.email || !req.body.telefono) {
     throw new Error("Missing required fields: nombre, email, telefono");
@@ -21,5 +30,6 @@ const postUsuarios = async (req, res) => {
 
 module.exports = {
   getUsuarios,
+  getUsuarioById,
   postUsuarios,
 };

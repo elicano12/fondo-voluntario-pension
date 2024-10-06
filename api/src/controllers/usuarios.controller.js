@@ -9,6 +9,15 @@ const getUsuarios = async (req, res, next) => {
   }
 };
 
+const getUsuarioById = async (req, res, next) => {
+  try {
+    const usuario = await usuariosServices.getUsuarioById(req.query.id);
+    return res.json(usuario);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const postUsuarios = async (req, res, next) => {
   try {
     await usuariosServices.postUsuarios(req, res);
@@ -20,5 +29,6 @@ const postUsuarios = async (req, res, next) => {
 
 module.exports = {
   getUsuarios,
+  getUsuarioById,
   postUsuarios,
 };

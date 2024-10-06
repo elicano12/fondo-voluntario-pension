@@ -9,6 +9,15 @@ const getFondosPensiones = async (req, res, next) => {
   }
 };
 
+const getFondosPensionesById = async (req, res, next) => {
+  try {
+    const fondos = await fondosServices.getFondosPensionesById(req.query.id);
+    return res.json(fondos);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const postFondosPensiones = async (req, res, next) => {
   try {
     await fondosServices.postFondosPensiones(req, res);
@@ -20,5 +29,6 @@ const postFondosPensiones = async (req, res, next) => {
 
 module.exports = {
   getFondosPensiones,
+  getFondosPensionesById,
   postFondosPensiones,
 };

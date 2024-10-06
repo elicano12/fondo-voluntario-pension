@@ -29,7 +29,8 @@ const postAperturaFondo = async (req, res, next) => {
 
 const postCancelacionFondo = async (req, res, next) => {
     try {
-        await transaccionesServices.postCancelacionFondo(req, res);
+        const { usuarioId, fondoId } = req.body;
+        await transaccionesServices.postCancelacionFondo(usuarioId, fondoId);
         res.status(201);
       } catch (err) {
         next(err);

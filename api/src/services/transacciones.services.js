@@ -3,7 +3,7 @@ const {
   fondosRepository,
   usuariosRepository,
 } = require("../repositories/");
-const { enviarSMS, enviarEmails } = require("../utils");
+// const { enviarSMS, enviarEmails } = require("../utils");
 const { NotFoundError, BadRequestError } = require("../utils/errorHandler");
 
 const getTransacciones = async () => {
@@ -81,17 +81,15 @@ const postAperturaFondo = async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: "Suscripción realizada con éxito." });
+      .json({ fondo, message: "Suscripción realizada con éxito." });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Error interno del servidor." });
   }
 };
 
-const postCancelacionFondo = async (req, res) => {
+const postCancelacionFondo = async (usuarioId, fondoId) => {
   try {
-    const { usuarioId, fondoId } = req.body;
-
     if (!usuarioId || !fondoId) {
       return res.status(400).json({
         message: "Faltan campos requeridos: usuarioId y fondoId",
@@ -130,24 +128,24 @@ const postCancelacionFondo = async (req, res) => {
 
     await transaccionesRepository.saveTransacciones(transaccionCancelar);
 
-    if (usuario.notificaciones === "email") {
-      enviarEmails(
-        usuario.email,
-        `Suscripción exitosa al fondo ${fondo.nombre}`
-      );
-    } else {
-      enviarSMS(
-        usuario.telefono,
-        `Suscripción exitosa al fondo ${fondo.nombre}`
-      );
-    }
+    // if (usuario.notificaciones === "email") {
+    //   enviarEmails(
+    //     usuario.email,
+    //     `Suscripción exitosa al fondo ${fondo.nombre}`
+    //   );
+    // } else {
+    //   enviarSMS(
+    //     usuario.telefono,
+    //     `Suscripción exitosa al fondo ${fondo.nombre}`
+    //   );
+    // }
 
     return res
       .status(200)
-      .json({ message: "Cancelación realizada con éxito." });
+      .json({ fondo, message: "Cancelación realizada con éxito." });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Error interno del servidor." });
+    return res.status(500).json({ message: error.message });
   }
 };
 
