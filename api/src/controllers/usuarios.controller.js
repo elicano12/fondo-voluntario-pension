@@ -11,7 +11,7 @@ const getUsuarios = async (req, res, next) => {
 
 const getUsuarioById = async (req, res, next) => {
   try {
-    const id = req.query.id;
+    const id = req.params.id;
     const usuario = await usuariosServices.getUsuarioById(id);
     return res.json(usuario);
   } catch (err) {

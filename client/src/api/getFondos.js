@@ -1,7 +1,7 @@
 import axios from "axios";
 import conf from "../conf";
 
-const getFondos = async (id) => {
+const getFondos = async () => {
   try {
     const apiUrl = `${conf.apiUrl}/fondos`;
     const response = await axios.get(apiUrl);

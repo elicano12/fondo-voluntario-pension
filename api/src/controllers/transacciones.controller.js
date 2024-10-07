@@ -11,7 +11,7 @@ const getTransacciones = async (req, res, next) => {
 
 const getTransaccionesUsuarioId = async (req, res, next) => {
   try {
-    const id = req.query.id;
+    const id = req.params.id;
     const transacciones = await transaccionesServices.getTransaccionesUsuarioId(
       id,
       (tipo = "apertura")

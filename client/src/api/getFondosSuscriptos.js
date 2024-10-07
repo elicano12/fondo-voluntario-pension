@@ -3,12 +3,8 @@ import conf from "../conf";
 
 const getFondos = async (id) => {
   try {
-    const apiUrl = `${conf.apiUrl}/transacciones/usuarioId`;
-    const response = await axios.get(apiUrl, {
-      params: {
-        id: id,
-      },
-    });
+    const apiUrl = `${conf.apiUrl}/transacciones/usuarioId/${id}`;
+    const response = await axios.get(apiUrl);
     return response.data;
   } catch (error) {
     console.error("Error encontrando el fondo:", error);

@@ -1,7 +1,7 @@
 const Joi = require("joi");
 
 const usuarioIdSchema = {
-  query: Joi.object({
+  params: Joi.object({
     id: Joi.string().required(),
   }),
 };

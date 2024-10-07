@@ -6,7 +6,7 @@ const validateRequest = require("../middlewares/validators");
 const fondosRouter = express.Router();
 
 fondosRouter.get("/", fondoController.getFondosPensiones);
-fondosRouter.get("/fondo-id", validateRequest(fondoIdSchema), fondoController.getFondosPensionesById);
+fondosRouter.get("/fondoId/:id", validateRequest(fondoIdSchema), fondoController.getFondosPensionesById);
 fondosRouter.post("/crear-tipo-fondos", validateRequest(crearFondosSchema), fondoController.postFondosPensiones);
 
 module.exports = fondosRouter;

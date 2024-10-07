@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import getFondosSuscriptos from "../api/getFondosSuscriptos";
 import getUsuarioById from "../api/getUsusarios";
-import getFondoById from "../api/getFondosById"
+import getFondoById from "../api/getFondosById";
+import { formatDate } from "../conf";
 
 const useFondosSuscriptos = ({id}) => {
   const [fondos, setFondos] = useState([]);
@@ -22,6 +23,7 @@ const useFondosSuscriptos = ({id}) => {
             ...fondo,
             usuario: usuario.nombre,
             fondo: fondos.nombre,
+            fecha: formatDate(fondos.fecha)
           };
         })
       );

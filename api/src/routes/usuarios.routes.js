@@ -10,7 +10,7 @@ const usuariosRouter = express.Router();
 
 usuariosRouter.get("/", usuariosController.getUsuarios);
 usuariosRouter.get(
-  "/usuario-id",
+  "/usuarioId/:id",
   validateRequest(usuarioIdSchema),
   usuariosController.getUsuarioById
 );

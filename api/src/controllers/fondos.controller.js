@@ -11,7 +11,7 @@ const getFondosPensiones = async (req, res, next) => {
 
 const getFondosPensionesById = async (req, res, next) => {
   try {
-    const fondos = await fondosServices.getFondosPensionesById(req.query.id);
+    const fondos = await fondosServices.getFondosPensionesById(req.params.id);
     return res.json(fondos);
   } catch (err) {
     next(err);
