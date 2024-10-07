@@ -16,21 +16,23 @@ const getTransacciones = async () => {
   return transacciones;
 };
 
-const postTransacciones = async (usuarioId, fondoId, tipo, monto) => {
-  if ( !usuarioId || !fondoId || !tipo || !monto) {
-    throw new BadRequestError("Missing required fields: tipo and monto");
+const getTransaccionesUsuarioId = async (id, tipo) => {
+  if (!id) {
+    throw new BadRequestError("El campo id es requerido");
   }
 
-  await transaccionesRepository.postTransacciones(suarioId, fondoId, tipo, monto);
+  const transacciones = await transaccionesRepository.getTransaccionesUsuarioId(
+    id,
+    tipo
+  );
+  return transacciones;
 };
 
 const postAperturaFondo = async (usuarioId, fondoId, monto, tipo) => {
   try {
 
     if (!usuarioId || !fondoId || !monto) {
-      return res.status(400).json({
-        message: "Faltan campos requeridos: usuarioId, fondoId and monto",
-      });
+        throw new BadRequestError("Faltan campos requeridos: usuarioId, fondoId y monto");
     }
 
     const usuario = await usuariosRepository.getUsuarioById(usuarioId);
@@ -39,6 +41,7 @@ const postAperturaFondo = async (usuarioId, fondoId, monto, tipo) => {
     if (usuario == null || fondo == null) {
       throw new NotFoundError("Usuario o fondo no encontrados");
     }
+
 
     if (usuario.saldo < monto) {
       throw new BadRequestError(
@@ -53,7 +56,7 @@ const postAperturaFondo = async (usuarioId, fondoId, monto, tipo) => {
     }
 
     usuario.saldo -= monto;
-
+    
     await usuariosRepository.saveUsuario(usuario);
 
     const transaccion = {
@@ -80,16 +83,14 @@ const postAperturaFondo = async (usuarioId, fondoId, monto, tipo) => {
     return { fondo, message: "Suscripción realizada con éxito." };
   } catch (error) {
     console.error(error);
-    return  {message: error.message };
+    throw new Error(error.message);
   }
 };
 
 const postCancelacionFondo = async (usuarioId, fondoId) => {
   try {
     if (!usuarioId || !fondoId) {
-      return res.status(400).json({
-        message: "Faltan campos requeridos: usuarioId y fondoId",
-      });
+        throw new BadRequestError("Faltan campos requeridos: usuarioId, fondoId ");
     }
 
     const fondo = await fondosRepository.getFondoPensionesById(fondoId);
@@ -116,13 +117,14 @@ const postCancelacionFondo = async (usuarioId, fondoId) => {
     await usuariosRepository.saveUsuario(usuario);
 
     const transaccionCancelar = {
+      _id: transaccion._id,
       usuarioId,
       fondoId,
       tipo: "cancelado",
       monto: transaccion.monto,
     };
 
-    await transaccionesRepository.saveTransacciones(transaccionCancelar);
+    await transaccionesRepository.updateTransacciones(transaccionCancelar);
 
     // if (usuario.notificaciones === "email") {
     //   enviarEmails(
@@ -139,13 +141,13 @@ const postCancelacionFondo = async (usuarioId, fondoId) => {
     return { fondo, message: "Cancelación realizada con éxito." };
   } catch (error) {
     console.error(error);
-    return { message: error.message };
+    throw new Error(error.message);
   }
 };
 
 module.exports = {
   getTransacciones,
-  postTransacciones,
+  getTransaccionesUsuarioId,
   postAperturaFondo,
   postCancelacionFondo,
 };

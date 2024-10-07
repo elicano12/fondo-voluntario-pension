@@ -20,7 +20,9 @@ const Table = ({ data, columns, onSuscribir, onCancelar }) => {
               {col}
             </th>
           ))}
-          {onSuscribir && onCancelar ? (
+          {onSuscribir == null && onCancelar == null ? (
+            <></>
+          ) : (
             <th
               style={{
                 padding: "10px",
@@ -30,8 +32,6 @@ const Table = ({ data, columns, onSuscribir, onCancelar }) => {
             >
               Acciones
             </th>
-          ) : (
-            <> </>
           )}
         </tr>
       </thead>
@@ -49,23 +49,45 @@ const Table = ({ data, columns, onSuscribir, onCancelar }) => {
                 {row[col]}
               </td>
             ))}
-            {onSuscribir && onCancelar ? (
+            {(onSuscribir == null && onCancelar) ? (
               <td
-                style={{
-                  padding: "10px",
-                  borderBottom: `1px solid ${colors.secondary}`,
-                  textAlign: "center",
-                }}
-              >
-                <div>
-                  <Button label={"Suscribir"} onClick={() => onSuscribir(row._id)}>Suscribir</Button>
-                </div>
-                <div>
-                  <Button label={"Cancelar"} onClick={() => onCancelar(row._id)}>Cancelar</Button>
-                </div>
-              </td>
+              style={{
+                padding: "10px",
+                borderBottom: `1px solid ${colors.secondary}`,
+                textAlign: "center",
+              }}
+            >
+              <div>
+                <Button
+                  label={"Cancelar"}
+                  onClick={() => onCancelar(row.fondoId)}
+                >
+                  Cancelar
+                </Button>
+              </div>
+            </td>
             ) : (
-              <> </>
+              <></>
+            )}
+            {(onSuscribir && onCancelar==null) ? (
+              <td
+              style={{
+                padding: "10px",
+                borderBottom: `1px solid ${colors.secondary}`,
+                textAlign: "center",
+              }}
+            >
+              <div>
+                <Button
+                  label={"Suscribir"}
+                  onClick={() => onSuscribir(row._id)}
+                >
+                  Suscribir
+                </Button>
+              </div>
+            </td>
+            ) : (
+              <></>
             )}
           </tr>
         ))}

@@ -11,6 +11,6 @@ const fondoSchema = new Schema(
   { timestamps: true }
 );
 
-const FondoModel = mongoose.model(config.collection, fondoSchema);
+const FondoModel = mongoose.model(config.collectionFondos, fondoSchema);
 
 module.exports = { FondoModel };

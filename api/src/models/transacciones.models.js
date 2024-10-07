@@ -8,7 +8,7 @@ const TransaccionSchema = new Schema({
   tipo: { type: String, enum: ["apertura", "cancelado"], required: true },
   monto: { type: Number, required: true },
   fecha: { type: Date, default: Date.now },
-  idUnico: { type: String, unique: true, required: true } 
+  unicoId: { type: String, unique: true} 
 });
 
 const TransaccionModel = mongoose.model(config.collectionTransaccion, TransaccionSchema);

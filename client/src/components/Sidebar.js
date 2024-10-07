@@ -22,7 +22,8 @@ const Sidebar = () => {
   return (
     <div style={styles}>
       <h2>Menú</h2>
-      <Link to="/gestion-fondos" style={menuItemStyle}>Suscribirse</Link>
+      <Link to="/gestion-fondos" style={menuItemStyle}>Suscribir</Link>
+      <Link to="/gestion-fondos-cancelar" style={menuItemStyle}>Cancelar</Link>
       <Link to="/historial" style={menuItemStyle}>Historial</Link>
     </div>
   );

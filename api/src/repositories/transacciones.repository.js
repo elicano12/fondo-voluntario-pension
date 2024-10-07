@@ -6,25 +6,26 @@ const getTransacciones = () => {
   return transacciones;
 };
 
-const postTransacciones = async (usuarioId, fondoId, tipo, monto) => {
-  const transacciones = new TransaccionModel({
-    usuarioId: usuarioId,
-    fondoId: fondoId,
-    tipo: tipo,
-    monto: monto,
-    idUnico: new Types.ObjectId().toString(),
-  });
-
-  await transacciones.save();
+const getTransaccionesUsuarioId = async (id, tipo) => {
+  const transacciones = TransaccionModel.find({ usuarioId: id, tipo: tipo });
   return transacciones;
 };
 
 const saveTransacciones = async (transacciones) => {
   const transaccion = new TransaccionModel({
     ...transacciones,
-    idUnico: new Types.ObjectId().toString(),
+    unicoId: new Types.ObjectId().toString(),
   });
   return await transaccion.save();
+};
+
+const updateTransacciones = async (transacciones) => {
+  const updatedTransaccion = await TransaccionModel.findByIdAndUpdate(
+    { _id: transacciones._id },
+    { $set: { tipo: transacciones.tipo } },
+    { new: true }
+  );
+  return updatedTransaccion;
 };
 
 const getTransaccionesCancelacion = async (usuarioId, fondoId) => {
@@ -38,7 +39,8 @@ const getTransaccionesCancelacion = async (usuarioId, fondoId) => {
 
 module.exports = {
   getTransacciones,
-  postTransacciones,
+  getTransaccionesUsuarioId,
   saveTransacciones,
+  updateTransacciones,
   getTransaccionesCancelacion,
 };

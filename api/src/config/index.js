@@ -5,7 +5,7 @@ module.exports = {
   log_level: process.env.LOG_LEVEL || 'info',
   mongoUri: process.env.MONGO_URI,
   isDevelopment: process.env.NODE_ENV === 'development',
-  collection: "fondos",
+  collectionFondos: "fondos",
   collectionUsuarios: "usuarios",
   collectionTransaccion: "transacciones",
   user: process.env.EMAIL_USER,
