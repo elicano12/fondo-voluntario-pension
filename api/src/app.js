@@ -4,7 +4,7 @@ const pinoHttp = require('pino-http');
 const routes = require('./routes');
 const cors = require('cors');
 
-// const errorHandlerMiddleware = require('./middlewares/errorHandler');
+const errorHandlerMiddleware = require('./middlewares/errorHandler.js');
 require('./config/databases/mongoDB');
 
 const app = express();
@@ -27,6 +27,6 @@ app.use(
 app.use('/api', routes);
 
 // Middleware to handle errors
-// app.use(errorHandlerMiddleware);
+app.use(errorHandlerMiddleware);
 
 module.exports = app;

@@ -1,9 +1,9 @@
-const fondosServices = require("./fondo.services");
-const usuariosServices = require("./usuarios.services");
-const transaccionesServices = require("./transacciones.services"); //
+const fundServices = require("./fund.services");
+const usersServices = require("./user.services");
+const transactionsServices = require("./transaction.services"); //
 
 module.exports = {
-  fondosServices,
-  usuariosServices,
-  transaccionesServices,
+  fundServices,
+  usersServices,
+  transactionsServices,
 };

@@ -4,6 +4,7 @@ import colors from "../styles/color";
 import Button from "./Button";
 
 const Table = ({ data, columns, onSuscribir, onCancelar }) => {
+  console.log(data)
   return (
     <table style={{ width: "100%", borderCollapse: "collapse" }}>
       <thead>
@@ -36,7 +37,7 @@ const Table = ({ data, columns, onSuscribir, onCancelar }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((row, index) => (
+        { data.length !== 0 ? (data.map((row, index) => (
           <tr key={index}>
             {columns.map((col) => (
               <td
@@ -90,7 +91,11 @@ const Table = ({ data, columns, onSuscribir, onCancelar }) => {
               <></>
             )}
           </tr>
-        ))}
+        ))) : (
+          <h3>
+            No hay fondos subscriptos
+          </h3>
+        )}
       </tbody>
     </table>
   );

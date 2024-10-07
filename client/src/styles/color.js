@@ -1,11 +1,11 @@
 const color = {
-  primary: "#023e8a", // Azul suave
-  secondary: "#b0c5e3", // Gris claro
-  success: "#91d18b", // Verde suave
-  danger: "#f28b82", // Rojo suave
+  primary: "#023e8a", 
+  secondary: "#b0c5e3", 
+  success: "#91d18b", 
+  danger: "#f28b82", 
   white: "#ffffff",
   black: "#333333",
-  background: "#f7f9fc", // Color de fondo suave
+  background: "#f7f9fc", 
 };
 
 export default color;

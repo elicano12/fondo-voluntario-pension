@@ -1,9 +1,9 @@
-const fondoController  = require("./fondos.controller");
-const usuariosController = require("./usuarios.controller");
-const transaccionesController = require("./transacciones.controller");
+const fundController  = require("./fund.controller");
+const usersController = require("./users.controller");
+const transactionsController = require("./transactions.controller");
 
 module.exports = {
-  fondoController,
-  usuariosController,
-  transaccionesController,
+  fundController,
+  usersController,
+  transactionsController,
 };

@@ -1,12 +1,12 @@
 const express = require("express");
-const fondoRouter = require("./fondos.routes");
-const usuariosRouter = require("./usuarios.routes");
-const transaccionesRouter = require("./transacciones.routes");
+const fundRouter = require("./fund.routes");
+const usersRouter = require("./users.routes");
+const transactionsRouter = require("./transaction.routes");
 
 const router = express.Router();
 
-router.use("/fondos", fondoRouter);
-router.use("/usuarios", usuariosRouter);
-router.use("/transacciones", transaccionesRouter);
+router.use("/fondos", fundRouter);
+router.use("/usuarios", usersRouter);
+router.use("/transacciones", transactionsRouter);
 
 module.exports = router;

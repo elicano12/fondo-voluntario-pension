@@ -1,8 +1,8 @@
 const request = require("supertest");
 const express = require("express");
 const app = require("../../app");
-const usuariosServices = require("../../services/usuarios.services");
-const usuariosController = require("../../controllers/usuarios.controller");
+const usuariosServices = require("../../services/user.services");
+const usuariosController = require("../../controllers/users.controller");
 
 app.use(express.json());
 
