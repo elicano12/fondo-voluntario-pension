@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Proyecto de Gestión de Fondos - BTG Pactual
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto es una aplicación de gestión de fondos, que permite a los clientes suscribir y cancelar fondos de inversión y consultar el historial de transacciones. Está compuesto por un **backend** (API) construido con **Express / nodeJS** y un **frontend** desarrollado con **React**. Ambas aplicaciones comparten el mismo repositorio.
 
-## Available Scripts
+## Requisitos previos
 
-In the project directory, you can run:
+Antes de empezar, asegúrate de tener instalados los siguientes programas en tu entorno:
 
-### `npm start`
+- **Node.js** (versión 14.x o superior)
+- **npm** como gestores de paquetes
+- **MongoDB** como base de datos para el backend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Configuración inicial
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clona el repositorio a tu máquina local:
+   ```bash
+   git clone https://github.com/elicano12/fondo-voluntario-pension.git
 
-### `npm test`
+2. Ingresar al proyecto:
+    ```bash 
+        cd fondo-voluntario-pension
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instalacion de dependencias, variables de entorno y ejecución del proyecto
 
-### `npm run build`
+- **Backend (API)**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Ingresar al Api:
+    ```bash 
+        cd api
+2. Instalar las dependencias:
+    ```bash 
+        npm install
+3. En el directorio api, crea un archivo .env con las siguientes variables:
+    ```bash 
+        NODE_ENV="development"
+        PORT=3001
+        MONGO_URI=
+        EMAIL_USER=
+        EMAIL_PASS=
+        TWILIO_SID=
+        TWILIO_SID_SMS=
+        TWILIO_TOKEN=
+        TWILIO_TELEFONO=
+4. Para iniciar el servidor del backend ejecuta el siguiente comando:
+    ```bash 
+        npm run start:dev
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Frontend (Client)**
+1. Ingresar al Cliente:
+    ```bash 
+        cd client
+2. Instalar las dependencias:
+    ```bash 
+        npm install
+ 3. En el directorio client, crea un archivo .env con las siguientes variables:
+    ```bash 
+        REACT_APP_ENVIRONMENT="development"
+        REACT_APP_API_URL="http://localhost:3001/api"
+4. Para iniciar el servidor del frontend ejecuta el siguiente comando:
+    ```bash 
+        npm run start
+Esto ejecutará el servidor de desarrollo de React, por defecto en el puerto 3000.
 
-### `npm run eject`
+#### Acceso a la aplicación
+El frontend estará disponible en http://localhost:3000.
+El backend estará disponible en http://localhost:3001/api.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Testing
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Backend**
+Para ejecutar las pruebas unitarias del backend, navega al directorio api y utiliza el siguiente comando:
+    ```bash 
+        npm run test
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Contacto
+Si tienes alguna duda o sugerencia, no dudes en ponerte en contacto conmigo: 
+   - **email:**  ele.cano111@gmail.com 
+   - **linkedIn:** https://www.linkedin.com/in/eli-cano/
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Explicación:
+- **Requisitos previos**: Lista de herramientas que el usuario necesita instalar antes de ejecutar el proyecto.
+- **Configuración inicial**: Comandos para clonar el repositorio y moverse al directorio del proyecto.
+- **Instalación de dependencias**: Se especifica cómo instalar las dependencias tanto para el backend como para el frontend.
+- **Variables de entorno**: Especificación de las variables de entorno necesarias para que el backend y el frontend funcionen correctamente.
+- **Ejecución del proyecto**: Instrucciones para ejecutar tanto el servidor backend como el frontend en sus respectivos puertos.
+- **Pruebas**: Instrucciones para ejecutar las pruebas unitarias del backend.
+- **Estructura del proyecto**: Una breve descripción de cómo está organizado el repositorio.

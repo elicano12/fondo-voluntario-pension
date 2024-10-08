@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   port: process.env.PORT || 3000,
-  log_level: process.env.LOG_LEVEL || 'info',
+  log_level:'info',
   mongoUri: process.env.MONGO_URI,
   isDevelopment: process.env.NODE_ENV === 'development',
   collectionFund: "fondos",

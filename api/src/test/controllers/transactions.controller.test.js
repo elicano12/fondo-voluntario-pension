@@ -57,7 +57,6 @@ describe("Controladores de Transacciones", () => {
 
   it("Debería abrir un fondo de pensión", async () => {
     const mockAperturaFondo = {
-      fondo: { id: 1, usuarioId: 1, fondoId: 2, monto: 1000, tipo: "apertura" },
       message: "Fondo abierto con éxito",
     };
 
@@ -86,7 +85,6 @@ describe("Controladores de Transacciones", () => {
 
   it("Debería cancelar un fondo de pensión", async () => {
     const mockCancelacionFondo = {
-      fondo: { id: 1, usuarioId: 1, fondoId: 2, tipo: "cancelacion" },
       message: "Fondo cancelado con éxito",
     };
 

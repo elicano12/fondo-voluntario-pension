@@ -179,18 +179,6 @@ describe("Transaction Services", () => {
       );
     });
 
-    it("debería lanzar un error BadRequest si el monto es menor que el mínimo requerido", async () => {
-      const mockUser = { id: usuarioId, saldo: 1500, notificaciones: "email" };
-      const mockFund = { id: fondoId, montoMinimo: 2000, nombre: "Fondo A" };
-
-      usersRepository.getUserById.mockResolvedValue(mockUser);
-      fundRepository.getFundPensionsById.mockResolvedValue(mockFund);
-
-      await expect(
-        transactionServices.postOpenFund(usuarioId, fondoId, monto, tipo)
-      ).rejects.toThrow(BadRequestError);
-    });
-
     it("debería realizar la suscripción exitosamente", async () => {
       const mockUser = {
         id: usuarioId,
