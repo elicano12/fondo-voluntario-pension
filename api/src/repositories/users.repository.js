@@ -22,8 +22,7 @@ const postUser = async (nombre, email, telefono, saldo, notificaciones) => {
     saldo: saldo,
     notificaciones: notificaciones,
   });
-  await user.save();
-  return user;
+  return await user.save();
 };
 
 module.exports = {

@@ -1,5 +1,5 @@
 const { usersRepository } = require("../repositories/index.js");
-const NotFoundError = require("../utils/errorHandler.js");
+const { NotFoundError } = require("../utils/errors.js");
 
 const getUsers = async () => {
   const users = await usersRepository.getUsers();

@@ -1,5 +1,5 @@
 const { fundRepository } = require("../repositories/index.js");
-const NotFoundError = require("../utils/errorHandler.js");
+const { NotFoundError } = require("../utils/errors.js");
 
 const getFundPensions = async () => {
   const allFundPensions = await fundRepository.getFundPensions();
@@ -25,7 +25,11 @@ const postFundPensions = async (nombre, montoMinimo, categoria) => {
     throw new Error("Missing required fields: nombre, montoMinimo, categoria");
   }
 
-  const fundPensions = await fundRepository.postFundPensions(nombre, montoMinimo, categoria);
+  const fundPensions = await fundRepository.postFundPensions(
+    nombre,
+    montoMinimo,
+    categoria
+  );
   return fundPensions;
 };
 

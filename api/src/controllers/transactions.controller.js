@@ -25,13 +25,13 @@ const getTransactionUserId = async (req, res, next) => {
 const postOpenFund = async (req, res, next) => {
   try {
     const { usuarioId, fondoId, monto, tipo } = req.body;
-    const { fondo, message } = await transactionsServices.postOpenFund(
+    const { fund, message } = await transactionsServices.postOpenFund(
       usuarioId,
       fondoId,
       monto,
       tipo
     );
-    res.status(201).json({ fondo, message });
+    res.status(201).json({ fondo: fund, message });
   } catch (err) {
     next(err);
   }
@@ -40,11 +40,11 @@ const postOpenFund = async (req, res, next) => {
 const postCancelFund = async (req, res, next) => {
   try {
     const { usuarioId, fondoId } = req.body;
-    const { fondo, message } = await transactionsServices.postCancelFund(
+    const { fund, message } = await transactionsServices.postCancelFund(
       usuarioId,
       fondoId
     );
-    res.status(201).json({ fondo, message });
+    res.status(201).json({ fondo: fund, message });
   } catch (err) {
     next(err);
   }

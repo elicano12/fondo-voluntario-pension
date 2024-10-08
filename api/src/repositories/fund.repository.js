@@ -16,8 +16,7 @@ const postFundPensions = async ( nombre, montoMinimo, categoria ) => {
     montoMinimo: montoMinimo,
     categoria: categoria,
   });
-  await fundPensions.save()
-  return fundPensions;
+  return await fundPensions.save();
 };
 
 module.exports = {

@@ -1,17 +1,16 @@
 const request = require("supertest");
 const express = require("express");
 const app = require("../../app");
-const usuariosServices = require("../../services/user.services");
-const usuariosController = require("../../controllers/users.controller");
+const usersServices = require("../../services/user.services");
+const usersController = require("../../controllers/users.controller");
 
 app.use(express.json());
 
-// Mock de la respuesta del servicio
-jest.mock("../../services/usuarios.services.js");
+jest.mock("../../services/user.services");
 
-app.get("/usuarios", usuariosController.getUsuarios);
-app.get("/usuarios/usuario-id", usuariosController.getUsuarioById);
-app.post("/usuarios/crear-usuarios", usuariosController.postUsuarios);
+app.get("/usuarios", usersController.getUsers);
+app.get("/usuarios/usuarioId/:id", usersController.getUserById);
+app.post("/usuarios/crear-usuarios", usersController.postUser);
 
 describe("Usuarios Controller", () => {
   afterEach(() => {
@@ -36,13 +35,13 @@ describe("Usuarios Controller", () => {
       },
     ];
 
-    usuariosServices.getUsuarios.mockResolvedValue(mockUsuarios);
+    usersServices.getUsers.mockResolvedValue(mockUsuarios);
 
     const res = await request(app).get("/usuarios");
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual(mockUsuarios);
-    expect(usuariosServices.getUsuarios).toHaveBeenCalledTimes(1);
+    expect(usersServices.getUsers).toHaveBeenCalledTimes(1);
   });
 
   it("Debería obtener un usuario por ID", async () => {
@@ -54,13 +53,13 @@ describe("Usuarios Controller", () => {
       notificaciones: "sms",
     };
 
-    usuariosServices.getUsuarioById.mockResolvedValue(mockUsuario);
+    usersServices.getUserById.mockResolvedValue(mockUsuario);
 
-    const res = await request(app).get("/usuarios/usuario-id").query({ id: "1" });
+    const res = await request(app).get("/usuarios/usuarioId/1");
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual(mockUsuario);
-    expect(usuariosServices.getUsuarioById).toHaveBeenCalledWith("1");
+    expect(usersServices.getUserById).toHaveBeenCalledWith("1");
   });
 
   it("Debería crear un nuevo usuario", async () => {
@@ -73,7 +72,7 @@ describe("Usuarios Controller", () => {
       notificaciones: "email",
     };
 
-    usuariosServices.postUsuarios.mockResolvedValue(mockNuevoUsuario);
+    usersServices.postUser.mockResolvedValue(mockNuevoUsuario);
 
     const nuevoUsuarioData = {
       nombre: "Nuevo Usuario",
@@ -87,7 +86,7 @@ describe("Usuarios Controller", () => {
 
     expect(res.status).toBe(201);
     expect(res.body).toEqual(mockNuevoUsuario);
-    expect(usuariosServices.postUsuarios).toHaveBeenCalledWith(
+    expect(usersServices.postUser).toHaveBeenCalledWith(
       "Nuevo Usuario",
       "nuevo@test.com",
       "123456789",

@@ -4,7 +4,7 @@ const {
   usersRepository,
 } = require("../repositories");
 const { enviarSMS, enviarEmails } = require("../utils");
-const { NotFoundError, BadRequestError } = require("../utils/errorHandler");
+const { NotFoundError, BadRequestError } = require("../utils/errors");
 
 const getTransactions = async () => {
   const transactions = await transactionsRepository.getTransactions();
@@ -17,10 +17,6 @@ const getTransactions = async () => {
 };
 
 const getTransactionUserId = async (id, tipo) => {
-  if (!id) {
-    throw new BadRequestError("Missing required fields: id");
-  }
-
   const transacciones = await transactionsRepository.getTransactionUserId(
     id,
     tipo
@@ -29,14 +25,8 @@ const getTransactionUserId = async (id, tipo) => {
 };
 
 const postOpenFund = async (usuarioId, fondoId, monto, tipo) => {
-  if (!usuarioId || !fondoId || !monto) {
-    throw new BadRequestError(
-      "Missing required fields: usuarioId, fondoId y monto"
-    );
-  }
-
   const users = await usersRepository.getUserById(usuarioId);
-  const fund = await fundRepository.getFundPensionsById(fundId);
+  const fund = await fundRepository.getFundPensionsById(fondoId);
 
   if (users == null || fund == null) {
     throw new NotFoundError("Users o Funds not found");
@@ -50,7 +40,7 @@ const postOpenFund = async (usuarioId, fondoId, monto, tipo) => {
 
   if (fund.montoMinimo > monto) {
     throw new BadRequestError(
-      `El fondo ${fondo.nombre} no cumple con el monto mínimo de ${fund.montoMinimo}`
+      `El fondo ${fund.nombre} no cumple con el monto mínimo de ${fund.montoMinimo}`
     );
   }
 
@@ -77,10 +67,6 @@ const postOpenFund = async (usuarioId, fondoId, monto, tipo) => {
 };
 
 const postCancelFund = async (usuarioId, fondoId) => {
-  if (!usuarioId || !fondoId) {
-    throw new BadRequestError("Missing required fields: usuarioId, fondoId ");
-  }
-
   const fund = await fundRepository.getFundPensionsById(fondoId);
   const users = await usersRepository.getUserById(usuarioId);
 
@@ -95,7 +81,7 @@ const postCancelFund = async (usuarioId, fondoId) => {
 
   if (!transaction) {
     throw new NotFoundError(
-      `No se encontró la transacción activa al fondo ${fondo.nombre}`
+      `No se encontró la transacción activa al fondo ${fund.nombre}`
     );
   }
 

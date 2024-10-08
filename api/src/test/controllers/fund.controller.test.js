@@ -1,17 +1,16 @@
 const request = require("supertest");
 const express = require("express");
 const app = require("../../app");
-const fondosController = require("../../controllers/fund.controller");
-const fondosServices = require("../../services/fund.services");
+const fundController = require("../../controllers/fund.controller");
+const fundServices = require("../../services/fund.services");
 
 app.use(express.json());
 
-// Mock de la respuesta del servicio
-jest.mock("../../services/fondo.services.js");
+jest.mock("../../services/fund.services");
 
-app.get("/fondos", fondosController.getFondosPensiones);
-app.get("/fondos/fondo-id", fondosController.getFondosPensionesById);
-app.post("/fondos/crear-tipo-fondos", fondosController.postFondosPensiones);
+app.get("/fondos", fundController.getFundPensions);
+app.get("/fondos/fondoId/:id", fundController.getFundPensionsById);
+app.post("/fondos/crear-tipo-fondos", fundController.postFundPensions);
 
 describe("Fondos Controller", () => {
   afterEach(() => {
@@ -27,13 +26,13 @@ describe("Fondos Controller", () => {
         categoria: "Categoria A",
       },
     ];
-    fondosServices.getFondosPensiones.mockResolvedValue(mockFondos);
+    fundServices.getFundPensions.mockResolvedValue(mockFondos);
 
     const res = await request(app).get("/fondos");
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual(mockFondos);
-    expect(fondosServices.getFondosPensiones).toHaveBeenCalled();
+    expect(fundServices.getFundPensions).toHaveBeenCalled();
   });
 
   it("Debería obtener un fondo de pensión por ID", async () => {
@@ -43,13 +42,13 @@ describe("Fondos Controller", () => {
       montoMinimo: 100000,
       categoria: "Categoria A",
     };
-    fondosServices.getFondosPensionesById.mockResolvedValue(mockFondo);
+    fundServices.getFundPensionsById.mockResolvedValue(mockFondo);
 
-    const res = await request(app).get("/fondos/fondo-id").query({ id: "1" });
+    const res = await request(app).get("/fondos/fondoId/1");
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual(mockFondo);
-    expect(fondosServices.getFondosPensionesById).toHaveBeenCalledWith("1");
+    expect(fundServices.getFundPensionsById).toHaveBeenCalledWith("1");
   });
 
   it("Debería crear un nuevo fondo de pensión", async () => {
@@ -58,7 +57,7 @@ describe("Fondos Controller", () => {
       montoMinimo: 200000,
       categoria: "FPV",
     };
-    fondosServices.postFondosPensiones.mockResolvedValue(nuevoFondo);
+    fundServices.postFundPensions.mockResolvedValue(nuevoFondo);
 
     const res = await request(app)
       .post("/fondos/crear-tipo-fondos")
@@ -66,7 +65,7 @@ describe("Fondos Controller", () => {
 
     expect(res.status).toBe(201);
     expect(res.body).toEqual(nuevoFondo);
-    expect(fondosServices.postFondosPensiones).toHaveBeenCalledWith(
+    expect(fundServices.postFundPensions).toHaveBeenCalledWith(
       "Fondo B",
       200000,
       "FPV"
