@@ -31,7 +31,7 @@ const useFundSubscription
 
       setFFund(fundFix);
     } catch (err) {
-      setError(err.message);
+      setError(err.data);
     } finally {
       setLoading(false);
     }

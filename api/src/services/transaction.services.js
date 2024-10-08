@@ -38,20 +38,14 @@ const postOpenFund = async (usuarioId, fondoId, monto, tipo) => {
     );
   }
 
-  if (fund.montoMinimo > monto) {
-    throw new BadRequestError(
-      `El fondo ${fund.nombre} no cumple con el monto mínimo de ${fund.montoMinimo}`
-    );
-  }
-
-  users.saldo -= monto;
+  users.saldo -= fund.montoMinimo;
 
   await usersRepository.saveUser(users);
 
   const trsnsaction = {
     usuarioId,
     fondoId,
-    monto,
+    monto: fund.montoMinimo,
     tipo,
   };
 

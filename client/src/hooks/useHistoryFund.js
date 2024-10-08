@@ -30,7 +30,7 @@ const useHistoryFund = () => {
 
       sethistoryFund(historyFundFix);
     } catch (err) {
-      setError(err.message);
+      setError(err.data);
     } finally {
       setLoading(false);
     }
