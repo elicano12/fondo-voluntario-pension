@@ -5,7 +5,7 @@ import getFundById from "../api/getFundById";
 import { formatDate } from "../conf";
 
 const useFundSubscription
- = ({id}) => {
+ = ({id}, flag) => {
   const [fund, setFFund] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -39,7 +39,7 @@ const useFundSubscription
 
   useEffect(() => {
     fetchFundSubscription(id);
-  }, [id]);
+  }, [id, flag]);
 
   return { fund, loading, error };
 };

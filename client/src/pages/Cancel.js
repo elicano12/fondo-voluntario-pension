@@ -7,13 +7,17 @@ import postCancelFund from "../api/postCancelFund";
 
 const CancelFund = () => {
   const [message, setMessage] = useState("");
-  const [hasError, setHasError] = useState(false)
+  const [hasError, setHasError] = useState(false);
+  const [reload, setReload] = useState(false)
+  // const [fund, setFund] = useState(null);
+  // const [loading, setLoading] = useState(null);
+  // const [error, setError] = useState(null);
 
   const columns = ["usuario", "fondo", "tipo", "monto", "fecha"];
 
   const { fund, loading, error } = useFundSubscription({
     id: "6701af42e1b6aa27ecf82c03",
-  });
+  }, reload);
 
   const handleCancel = async (_id) => {
     const data = await postCancelFund({
@@ -27,6 +31,7 @@ const CancelFund = () => {
     }
 
     setMessage(`${data.message} para el fondo ${data.fondo.nombre}`);
+    setReload(!reload);
   };
 
   if (loading) {
